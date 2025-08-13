@@ -46,4 +46,7 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private Set<Reparacion> reparaciones;
 
+    @Column(name = "estado")
+    private EstadoCliente estado;
+
 }
