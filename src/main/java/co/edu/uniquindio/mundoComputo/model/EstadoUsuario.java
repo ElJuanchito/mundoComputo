@@ -1,6 +1,6 @@
 package co.edu.uniquindio.mundoComputo.model;
 
-public enum EstadoCliente {
+public enum EstadoUsuario {
     ACTIVO,
     INACTIVO,
     ELIMINADO

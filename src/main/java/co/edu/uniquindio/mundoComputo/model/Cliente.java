@@ -15,6 +15,7 @@ import java.util.Set;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +48,6 @@ public class Cliente {
     private Set<Reparacion> reparaciones;
 
     @Column(name = "estado")
-    private EstadoCliente estado;
+    private EstadoUsuario estado;
 
 }
