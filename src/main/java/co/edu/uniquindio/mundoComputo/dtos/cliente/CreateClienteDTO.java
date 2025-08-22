@@ -2,8 +2,6 @@ package co.edu.uniquindio.mundoComputo.dtos.cliente;
 
 import jakarta.validation.constraints.*;
 
-import java.io.Serializable;
-
 /**
  * DTO for {@link co.edu.uniquindio.mundoComputo.model.Cliente}
  */
