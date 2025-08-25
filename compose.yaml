@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - POSTGRES_DB=mundoComputo
+      - POSTGRES_PASSWORD=secretc
+      - POSTGRES_USER=postgres
+    ports:
+      - '5432'

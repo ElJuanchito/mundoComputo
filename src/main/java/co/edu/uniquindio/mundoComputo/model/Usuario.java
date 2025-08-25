@@ -2,6 +2,8 @@ package co.edu.uniquindio.mundoComputo.model;
 
 import lombok.*;
 
+import java.util.Set;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -39,9 +41,11 @@ public class Usuario {
     @Column(name = "apellido")
     private String apellido;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "rol_id", nullable = false)
-    private Rol rol;
+    @NotNull
+    @Column(name = "rol")
+    private Set<Rol> rol;
 
-    //agregar estado
+    @NotNull
+    @Column(name = "estado")
+    private EstadoUsuario esstado;
 }
