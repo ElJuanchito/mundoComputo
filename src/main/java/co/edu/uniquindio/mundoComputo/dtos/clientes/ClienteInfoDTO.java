@@ -1,4 +1,4 @@
-package co.edu.uniquindio.mundoComputo.dtos.cliente;
+package co.edu.uniquindio.mundoComputo.dtos.clientes;
 
 import co.edu.uniquindio.mundoComputo.model.EstadoUsuario;
 import jakarta.validation.constraints.Email;

@@ -1,4 +1,4 @@
-package co.edu.uniquindio.mundoComputo.dtos.cliente;
+package co.edu.uniquindio.mundoComputo.dtos.clientes;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

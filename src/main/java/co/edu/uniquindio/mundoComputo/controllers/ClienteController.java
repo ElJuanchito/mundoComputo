@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import co.edu.uniquindio.mundoComputo.dtos.cliente.*;
+import co.edu.uniquindio.mundoComputo.dtos.clientes.*;
 import co.edu.uniquindio.mundoComputo.dtos.responses.MessageDTO;
 import co.edu.uniquindio.mundoComputo.model.EstadoUsuario;
 import co.edu.uniquindio.mundoComputo.services.ClienteService;

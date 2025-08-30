@@ -7,3 +7,5 @@ services:
       - POSTGRES_USER=postgres
     ports:
       - '5432'
+    expose:
+      - '5432'

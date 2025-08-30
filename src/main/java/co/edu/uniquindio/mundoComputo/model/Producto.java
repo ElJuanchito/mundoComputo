@@ -15,6 +15,7 @@ import java.util.Set;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +40,11 @@ public class Producto {
     @Min(0)
     @Column(name = "stock")
     private Integer stock;
+
+    @NotNull
+    @Min(0)
+    @Column(name = "stock_minimo")
+    private Integer stockMinimo;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)

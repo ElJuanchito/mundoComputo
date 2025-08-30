@@ -9,7 +9,7 @@ import gg.jte.output.StringOutput;
 import lombok.RequiredArgsConstructor;
 
 import jakarta.mail.internet.MimeMessage;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
