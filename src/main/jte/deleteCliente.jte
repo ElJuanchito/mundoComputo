@@ -1,4 +1,4 @@
-@params(String nombre)
+@param String nombre
 
 <!DOCTYPE html>
 <html>
@@ -56,7 +56,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="https://mundo-computo.com/logo.png" alt="Mundo Computo" style="height:40px;">
+            <span style="font-size: 1.5em; font-weight: bold; letter-spacing: 2px;">Mundo Computo</span>
         </div>
         <h2 class="title">Cuenta eliminada</h2>
         <div class="content">

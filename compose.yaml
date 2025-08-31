@@ -1,11 +1,9 @@
 services:
-  postgres:
-    image: 'postgres:latest'
+  keycloak:
+    image: 'quay.io/keycloak/keycloak:24.0.2'
     environment:
-      - POSTGRES_DB=mundoComputo
-      - POSTGRES_PASSWORD=secretc
-      - POSTGRES_USER=postgres
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
     ports:
-      - '5432'
-    expose:
-      - '5432'
+      - '8081:8080'
+    command: "start-dev"

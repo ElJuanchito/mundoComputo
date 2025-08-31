@@ -12,7 +12,7 @@ public enum TemplateEmailType {
     PRODUCTO_DELETE("productoDelete"),
     PRODUCTO_OUTPUT("productoOutput"),
     PRODUCTO_INPUT("productoInput"),
-    NOTIFICATION("notification");
+    NOTIFICATION("notificationInventario");
 
 
     final String value;

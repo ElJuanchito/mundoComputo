@@ -1,10 +1,10 @@
-@param String nombre
+@param String mensaje
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Actualización de datos</title>
+    <title>Notificación de Inventario</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,12 +45,6 @@
             text-align: center;
             margin-top: 32px;
         }
-        .button {
-            display: inline-block;
-            color: #d90429;
-            text-decoration: none;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -58,10 +52,9 @@
         <div class="header">
             <span style="font-size: 1.5em; font-weight: bold; letter-spacing: 2px;">Mundo Computo</span>
         </div>
-        <h2 class="title">¡Hola de nuevo ${nombre}!</h2>
+        <h2 class="title">Notificación de Inventario</h2>
         <div class="content">
-            <p>Queremos informarte que tus datos han sido <b>actualizados exitosamente</b> en <span style="color:#d90429;">Mundo Computo</span>.</p>
-            <p>Si no realizaste esta acción, por favor <a href="mailto:soporte@mundo-computo.com" class="button">contáctanos</a> de inmediato.</p>
+            <p>${mensaje}</p>
         </div>
         <div class="footer">
             Gracias por confiar en nosotros.<br>
