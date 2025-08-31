@@ -40,7 +40,25 @@ public class EmailServiceImpl implements EmailService {
         helper.setSubject(subject);
         helper.setText(output.toString(), true); // true = HTML
 
-        // 3. Enviar
         mailSender.send(message);
+    }
+
+    @Override
+    public void sendNotification(String email, String subject, String message, TemplateEmailType templateType) throws Exception {
+        StringOutput output = new StringOutput();
+        templateEngine.render(
+            String.format("%s.jte", templateType.getValue()),
+            Map.of("mensaje", message),
+            output
+        );
+
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+
+        helper.setTo(email);
+        helper.setSubject(subject);
+        helper.setText(output.toString(), true);
+
+        mailSender.send(mimeMessage);
     }
 }

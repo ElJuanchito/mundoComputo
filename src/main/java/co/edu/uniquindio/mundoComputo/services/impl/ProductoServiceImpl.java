@@ -1,5 +1,6 @@
 package co.edu.uniquindio.mundoComputo.services.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,9 +11,16 @@ import co.edu.uniquindio.mundoComputo.dtos.productos.CreateProductoDTO;
 import co.edu.uniquindio.mundoComputo.dtos.productos.ProductoInfoDTO;
 import co.edu.uniquindio.mundoComputo.dtos.productos.UpdateProductoDTO;
 import co.edu.uniquindio.mundoComputo.model.CategoriaProducto;
+import co.edu.uniquindio.mundoComputo.model.HistoricoInventario;
 import co.edu.uniquindio.mundoComputo.model.Producto;
+import co.edu.uniquindio.mundoComputo.model.Rol;
+import co.edu.uniquindio.mundoComputo.model.TemplateEmailType;
+import co.edu.uniquindio.mundoComputo.model.TipoMovimientoInventario;
+import co.edu.uniquindio.mundoComputo.model.Usuario;
 import co.edu.uniquindio.mundoComputo.repositories.ProductoRepository;
+import co.edu.uniquindio.mundoComputo.repositories.UsuarioRepository;
 import co.edu.uniquindio.mundoComputo.repositories.CategoriaProductoRepository;
+import co.edu.uniquindio.mundoComputo.repositories.HistoricoInventarioRepository;
 import co.edu.uniquindio.mundoComputo.services.EmailService;
 import co.edu.uniquindio.mundoComputo.services.ProductoService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +33,8 @@ public class ProductoServiceImpl implements ProductoService {
     private final ProductoRepository productoRepository;
     private final CategoriaProductoRepository categoriaRepository;
     private final EmailService emailService;
+    private final HistoricoInventarioRepository historicoInventarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Override
     public void createProducto(CreateProductoDTO createProductoDTO) throws Exception {
@@ -60,12 +70,15 @@ public class ProductoServiceImpl implements ProductoService {
         producto.setCategoria(categoria);
 
         productoRepository.save(producto);
+
+        sendAdminNotification("Producto actualizado", "El producto " + producto.getNombre() + " ha sido actualizado.");
     }
     
     @Override
     public void deleteProducto(Long id) throws Exception {
         Producto producto = getProductoById(id);
         productoRepository.delete(producto);
+        sendAdminNotification("Producto eliminado", "El producto " + producto.getNombre() + " ha sido eliminado.");
     }
 
     @Override
@@ -82,7 +95,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public void recordOutput(Long id, int cantidad, String description) throws Exception {
+    public void recordOutput(Long id, Long userId, int cantidad, String description) throws Exception {
         Producto producto = getProductoById(id);
 
         int nuevoStock = producto.getStock() - cantidad;
@@ -92,28 +105,85 @@ public class ProductoServiceImpl implements ProductoService {
         }
         
         if(nuevoStock < producto.getStockMinimo()) {
-            //emailService.sendHtmlEmail();
-            //TODO requiere de el correo del admin, es decir tener un admin registrado
+            sendAdminNotification("Alerta de stock bajo", "El producto " + producto.getNombre() + " ha alcanzado un stock bajo.");
         }
 
+        Usuario usuario = usuarioRepository.findById(userId)
+                .orElseThrow(() -> new Exception(String.format("Usuario con id: %s no encontrado", userId)));
+
+        HistoricoInventario historico = HistoricoInventario.builder()
+                .producto(producto)
+                .fecha(LocalDateTime.now())
+                .cantidadAnterior(producto.getStock())
+                .cantidadNueva(nuevoStock)
+                .tipoMovimiento(TipoMovimientoInventario.SALIDA)
+                .comentario(description)
+                .usuario(usuario)
+                .build();
+
+        historicoInventarioRepository.save(historico);
+
         producto.setStock(nuevoStock);
+        productoRepository.save(producto);
+
+        String message = String.format("Se ha registrado una salida del producto %s. Stock actual: %d", producto.getNombre(), nuevoStock);
+        sendAdminNotification("Salida de producto", message);
     }
 
     @Override
-    public void recordInput(Long id, int cantidad, String description) throws Exception {
+    public void recordInput(Long id, Long userId, int cantidad, String description) throws Exception {
         Producto producto = getProductoById(id);
 
         int nuevoStock = producto.getStock() + cantidad;
-        producto.setStock(nuevoStock);
 
-        // Implementar la lógica para registrar una entrada
-        // TODO emailService.sendHtmlEmail();
+        Usuario usuario = usuarioRepository.findById(userId)
+                .orElseThrow(() -> new Exception(String.format("Usuario con id: %s no encontrado", userId)));
+
+        HistoricoInventario historico = HistoricoInventario.builder()
+                .producto(producto)
+                .fecha(LocalDateTime.now())
+                .cantidadAnterior(producto.getStock())
+                .cantidadNueva(nuevoStock)
+                .tipoMovimiento(TipoMovimientoInventario.ENTRADA)
+                .comentario(description)
+                .usuario(usuario)
+                .build();
+
+        historicoInventarioRepository.save(historico);
+
+        producto.setStock(nuevoStock);
+        productoRepository.save(producto);
+
+        String message = String.format("Se ha registrado una entrada del producto %s. Stock actual: %d", producto.getNombre(), nuevoStock);
+        sendAdminNotification("Entrada de producto", message);
     }
 
     @Override
-    public void recordAdjust(Long id, int cantidad, String description) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'recordAdjust'");
+    public void recordAdjust(Long id, Long userId, int cantidad, String description) throws Exception {
+        Producto producto = getProductoById(id);
+
+        int nuevoStock = cantidad;
+
+        Usuario usuario = usuarioRepository.findById(userId)
+                .orElseThrow(() -> new Exception(String.format("Usuario con id: %s no encontrado", userId)));
+
+        HistoricoInventario historico = HistoricoInventario.builder()
+                .producto(producto)
+                .fecha(LocalDateTime.now())
+                .cantidadAnterior(producto.getStock())
+                .cantidadNueva(nuevoStock)
+                .tipoMovimiento(TipoMovimientoInventario.AJUSTE)
+                .comentario(description)
+                .usuario(usuario)
+                .build();
+
+        historicoInventarioRepository.save(historico);
+
+        producto.setStock(nuevoStock);
+        productoRepository.save(producto);
+
+        String message = String.format("Se ha registrado un ajuste del producto %s. Stock actual: %d", producto.getNombre(), nuevoStock);
+        sendAdminNotification("Ajuste de producto", message);
     }
 
     private CategoriaProducto getCategoriaById(Long categoriaId) throws Exception {
@@ -149,6 +219,19 @@ public class ProductoServiceImpl implements ProductoService {
         CategoriaProducto categoria = getCategoriaById(categoriaId);
         List<Producto> productos = productoRepository.findByCategoria(categoria);
         return productos.stream().map(this::mapToInfoDTO).toList();
+    }
+
+    @Override
+    public List<HistoricoInventario> getHistorico(Long productoId) throws Exception {
+        Producto producto = getProductoById(productoId);
+        return historicoInventarioRepository.findByProducto(producto);
+    }
+
+    private void sendAdminNotification(String subject, String message) throws Exception {
+        List<Usuario> admins = usuarioRepository.findByRol(Rol.ADMIN);
+        for (Usuario admin : admins) {
+            emailService.sendNotification(admin.getEmail(), subject, message, TemplateEmailType.NOTIFICATION);
+        }
     }
 
 }

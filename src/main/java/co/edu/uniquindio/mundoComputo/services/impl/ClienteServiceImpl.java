@@ -46,6 +46,8 @@ public class ClienteServiceImpl implements ClienteService {
                         .estado(EstadoUsuario.ACTIVO)
                         .build()
         );
+
+        emailService.sendHtmlEmail(clienteDTO.email(), "Cuenta creada", clienteDTO.nombre(), TemplateEmailType.CREATE_CLIENTE);
     }
 
     /**
