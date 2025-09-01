@@ -43,9 +43,9 @@ public class Usuario {
 
     @NotNull
     @Column(name = "rol")
-    private Set<Rol> rol;
+    private Rol rol;
 
     @NotNull
     @Column(name = "estado")
-    private EstadoUsuario esstado;
+    private EstadoUsuario estado;
 }
