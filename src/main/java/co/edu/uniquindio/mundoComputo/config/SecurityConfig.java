@@ -1,7 +1,6 @@
 package co.edu.uniquindio.mundoComputo.config;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,8 +25,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // deshabilitamos CSRF porque usamos JWT
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()  // login/registro públicos
-                        .requestMatchers("/admin/**").hasRole("ADMIN") // protegido por rol
+                        .requestMatchers("/**").permitAll()  // login/registro públicos
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN") // protegido por rol
                         .anyRequest().authenticated() // todo lo demás requiere autenticación
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
