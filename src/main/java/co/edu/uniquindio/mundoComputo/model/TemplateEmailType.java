@@ -8,11 +8,10 @@ public enum TemplateEmailType {
     UPDATE_CLIENTE("updateCliente"),
     CREATE_CLIENTE("createCliente"),
     DELETE_CLIENTE("deleteCliente"),
-    PRODUCTO_UPDATE("productoUpdate"),
-    PRODUCTO_DELETE("productoDelete"),
-    PRODUCTO_OUTPUT("productoOutput"),
-    PRODUCTO_INPUT("productoInput"),
-    NOTIFICATION("notificationInventario");
+    DEACTIVATE_CLIENTE("desactivateCliente"),
+
+    NOTIFICATION("notificationInventario"),
+    VERIFICATION_CODE("codigoVerificacion");
 
 
     final String value;

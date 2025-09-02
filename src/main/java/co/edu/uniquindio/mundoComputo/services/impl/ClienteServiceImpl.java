@@ -104,6 +104,15 @@ public class ClienteServiceImpl implements ClienteService {
                 .toList();
     }
 
+    @Override
+    public void desactivarCliente(Long id) throws Exception {
+        Cliente cliente = getClientById(id);
+        cliente.setEstado(EstadoUsuario.INACTIVO);
+
+        clienteRepository.save(cliente);
+        emailService.sendHtmlEmail(cliente.getEmail(), "Cuenta desactivada", cliente.getNombre(), TemplateEmailType.DEACTIVATE_CLIENTE);
+    }
+
     /**
      * {@inheritDoc}
      * Obtiene la lista de clientes filtrados por estado.

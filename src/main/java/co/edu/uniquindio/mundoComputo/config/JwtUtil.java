@@ -13,15 +13,16 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtUtil {
 
-    private final String SECRET_KEY = "mi_clave_secreta_super_segura";
+    private final String SECRET_KEY = "secretosecretosecretosecretosecretosecretosecretosecretosecretosecreto";
 
     public String generateToken(Usuario usuario) {
         return Jwts.builder()
                 .setSubject(usuario.getEmail())
+                .setIssuer("mundoComputo")
                 .claim("id", usuario.getId())
                 .claim("rol", usuario.getRol().name())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 3600)) // 1h
+                .setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 1000)) // 1h // 1h
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }

@@ -50,6 +50,14 @@ public interface ClienteService {
     List<ClienteInfoDTO> getAllClientes() throws Exception;
 
     /**
+     * Obtiene un cliente por su identificador y lo desactiva.
+     * @param id Identificador único del cliente.
+     * @return Cliente encontrado.
+     * @throws Exception si el cliente no existe o ocurre un error.
+     */
+    void desactivarCliente(Long id) throws Exception;
+
+    /**
      * Obtiene la lista de clientes filtrados por estado.
      * @param estado Estado por el cual filtrar los clientes.
      * @return Lista de DTOs con la información de los clientes filtrados.

@@ -25,9 +25,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // deshabilitamos CSRF porque usamos JWT
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll()  // login/registro públicos
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN") // protegido por rol
-                        .anyRequest().authenticated() // todo lo demás requiere autenticación
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/inventario/**").hasAnyRole("ADMIN", "INVENTARIO")
+                        .requestMatchers("/api/clientes/**").hasAnyRole("ADMIN", "VENDEDOR")
+                        .anyRequest().permitAll()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 

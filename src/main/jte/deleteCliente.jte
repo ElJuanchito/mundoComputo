@@ -1,4 +1,4 @@
-@param String nombre
+@param String variable
 
 <!DOCTYPE html>
 <html>
@@ -60,7 +60,7 @@
         </div>
         <h2 class="title">Cuenta eliminada</h2>
         <div class="content">
-            <p>Hola ${nombre},</p>
+            <p>Hola ${variable},</p>
             <p>Te informamos que tu cuenta en <span style="color:#d90429;">Mundo Computo</span> ha sido <b>eliminada exitosamente</b>.</p>
             <p>Si no solicitaste esta acción o tienes alguna inquietud, por favor <a href="mailto:soporte@mundo-computo.com" class="button">contáctanos</a> de inmediato.</p>
         </div>

@@ -4,11 +4,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Actualización de datos</title>
+    <title>Código de Verificación</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #fff;
+            background-color: #f7f7f7;
             margin: 0;
             padding: 0;
         }
@@ -18,7 +18,7 @@
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border: 2px solid #000;
+            border: 1px solid #ddd;
             padding: 32px 24px;
         }
         .header {
@@ -38,18 +38,25 @@
             color: #222;
             font-size: 16px;
             margin-bottom: 24px;
+            text-align: center;
+        }
+        .code-box {
+            background: #f3f3f3;
+            border: 2px dashed #d90429;
+            font-size: 24px;
+            font-weight: bold;
+            color: #d90429;
+            padding: 16px;
+            border-radius: 6px;
+            text-align: center;
+            display: inline-block;
+            margin: 20px auto;
         }
         .footer {
-            color: #d90429;
+            color: #666;
             font-size: 14px;
             text-align: center;
             margin-top: 32px;
-        }
-        .button {
-            display: inline-block;
-            color: #d90429;
-            text-decoration: none;
-            font-weight: bold;
         }
     </style>
 </head>
@@ -58,10 +65,12 @@
         <div class="header">
             <span style="font-size: 1.5em; font-weight: bold; letter-spacing: 2px;">Mundo Computo</span>
         </div>
-        <h2 class="title">¡Hola de nuevo ${variable}!</h2>
+        <h2 class="title">Verificación de Seguridad</h2>
         <div class="content">
-            <p>Queremos informarte que tus datos han sido <b>actualizados exitosamente</b> en <span style="color:#d90429;">Mundo Computo</span>.</p>
-            <p>Si no realizaste esta acción, por favor <a href="mailto:soporte@mundo-computo.com" class="button">contáctanos</a> de inmediato.</p>
+            <p>Tu código de verificación es:</p>
+            <div class="code-box">${variable}</div>
+            <p>Este código es válido por unos minutos.
+            Si no solicitaste esta verificación, ignora este mensaje.</p>
         </div>
         <div class="footer">
             Gracias por confiar en nosotros.<br>

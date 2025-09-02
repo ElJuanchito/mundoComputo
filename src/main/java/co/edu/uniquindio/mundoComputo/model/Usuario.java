@@ -48,4 +48,10 @@ public class Usuario {
     @NotNull
     @Column(name = "estado")
     private EstadoUsuario estado;
+
+    @ToString.Exclude
+    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "codigo_verificacion_id")
+    private CodigoVerificacion codigoVerificacion;
+
 }

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.mundoComputo.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/clientes")
 @RequiredArgsConstructor
 @Tag(name = "clientes")
+@SecurityRequirement(name = "bearerAuth")
 public class ClienteController {
 
     private final ClienteService clienteService;
@@ -46,9 +48,9 @@ public class ClienteController {
 
     @Operation(summary = "Obtener informacion del cliente", description = "Obtiene la informacion de un cliente por su ID")
     @GetMapping("/{id}")
-    public ResponseEntity<MessageDTO<String>> getClienteInfoById(@PathVariable("id") Long id) throws Exception {
-        clienteService.getClienteInfoById(id);
-        return ResponseEntity.status(200).body(new MessageDTO<>(false, "Informacion del cliente obtenido satisfactoriamente"));
+    public ResponseEntity<MessageDTO<ClienteInfoDTO>> getClienteInfoById(@PathVariable("id") Long id) throws Exception {
+        ClienteInfoDTO clienteInfo = clienteService.getClienteInfoById(id);
+        return ResponseEntity.status(200).body(new MessageDTO<>(false, clienteInfo));
     }
 
     @GetMapping()
@@ -63,6 +65,13 @@ public class ClienteController {
     public ResponseEntity<MessageDTO<List<ClienteInfoDTO>>> getClientesByEstado(@RequestParam("estado") EstadoUsuario estado) throws Exception {
         List<ClienteInfoDTO> clientes = clienteService.getClientesByEstado(estado);
         return ResponseEntity.status(200).body(new MessageDTO<>(false, clientes));
+    }
+
+    @PutMapping("/desactivar/{id}")
+    @Operation(summary = "Desactivar cliente", description = "Desactiva la cuenta de un cliente")
+    public ResponseEntity<MessageDTO<String>> desactivarCliente(@PathVariable("id") Long id) throws Exception {
+        clienteService.desactivarCliente(id);
+        return ResponseEntity.status(200).body(new MessageDTO<>(false, "Cliente desactivado satisfactoriamente"));
     }
     
     

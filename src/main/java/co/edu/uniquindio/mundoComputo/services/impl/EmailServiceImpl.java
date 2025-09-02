@@ -18,20 +18,29 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 import java.util.Map;
 
+/**
+ * Implementación del servicio de envío de correos electrónicos.
+ * Utiliza plantillas JTE para generar el contenido HTML y envía correos mediante JavaMailSender.
+ * Los métodos son asíncronos y permiten enviar correos HTML y notificaciones parametrizadas.
+ */
+@Async
 @Service
 @Transactional
 @RequiredArgsConstructor
-@Async
 public class EmailServiceImpl implements EmailService {
 
     private final JavaMailSender mailSender;
     private final TemplateEngine templateEngine;
 
+    /**
+     * {@inheritDoc}
+     * Renderiza la plantilla HTML y envía el correo electrónico al destinatario.
+     */
     @Override
-    public void sendHtmlEmail(String email, String subject, String name, TemplateEmailType templateType) throws Exception {
+    public void sendHtmlEmail(String email, String subject, String variable, TemplateEmailType templateType) throws Exception {
 
         StringOutput output = new StringOutput();
-        templateEngine.render(String.format("%s.jte", templateType.getValue()), Map.of("nombre", name), output);
+        templateEngine.render(String.format("%s.jte", templateType.getValue()), Map.of("variable", variable), output);
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
@@ -43,6 +52,10 @@ public class EmailServiceImpl implements EmailService {
         mailSender.send(message);
     }
 
+    /**
+     * {@inheritDoc}
+     * Renderiza la plantilla de notificación y envía el correo electrónico al destinatario.
+     */
     @Override
     public void sendNotification(String email, String subject, String message, TemplateEmailType templateType) throws Exception {
         StringOutput output = new StringOutput();

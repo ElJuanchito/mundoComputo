@@ -1,4 +1,4 @@
-@param String nombre
+@param String variable
 
 <!DOCTYPE html>
 <html>
@@ -58,7 +58,7 @@
         <div class="header">
             <span style="font-size: 1.5em; font-weight: bold; letter-spacing: 2px;">Mundo Computo</span>
         </div>
-        <h2 class="title">¡Bienvenido, ${nombre}!</h2>
+        <h2 class="title">¡Bienvenido, ${variable}!</h2>
         <div class="content">
             <p>Tu cuenta ha sido <b>creada exitosamente</b> en <span style="color:#d90429;">Mundo Computo</span>.</p>
             <p>Ya puedes acceder a nuestros servicios y disfrutar de todos los beneficios que ofrecemos.</p>

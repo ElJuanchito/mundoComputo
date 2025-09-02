@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uniquindio.mundoComputo.dtos.auth.TokenDTO;
 import co.edu.uniquindio.mundoComputo.dtos.responses.MessageDTO;
+import co.edu.uniquindio.mundoComputo.dtos.usuarios.ChangePasswordDTO;
 import co.edu.uniquindio.mundoComputo.dtos.usuarios.CreateUsuarioDTO;
 import co.edu.uniquindio.mundoComputo.dtos.usuarios.LoginDTO;
 import co.edu.uniquindio.mundoComputo.model.Rol;
@@ -37,19 +39,19 @@ public class AuthController {
         return new MessageDTO<>(false, token);
     }
 
-    @Operation(summary = "Registrar usuario", description = "Crea un nuevo usuario en la plataforma")
-    @PostMapping("/register")
+    @Operation(summary = "Enviar código de verificación", description = "Envía un código de verificación al correo electrónico del usuario")
+    @PostMapping("/send-verification-code")
     @ResponseStatus(code = HttpStatus.OK)
-    public MessageDTO<String> createUsuario(@Valid @RequestBody CreateUsuarioDTO createUsuarioDTO) throws Exception {
-        usuarioService.createUser(createUsuarioDTO);
-        return new MessageDTO<>(false, "Usuario registrado exitosamente");
+    public MessageDTO<String> sendVerificationCode(@RequestParam String email) throws Exception {
+        usuarioService.sendVerificationCode(email);
+        return new MessageDTO<>(false, "Código de verificación enviado correctamente");
     }
 
-    @Operation(summary = "Obtener roles", description = "Obtiene la lista de roles disponibles")
-    @GetMapping("/roles")
+    @Operation(summary = "Cambiar contraseña", description = "Cambia la contraseña de un usuario usando el código de verificación")
+    @PostMapping("/change-password")
     @ResponseStatus(code = HttpStatus.OK)
-    public MessageDTO<List<Rol>> getRoles() throws Exception {
-        List<Rol> roles = usuarioService.getRoles();
-        return new MessageDTO<>(false, roles);
+    public MessageDTO<String> changePassword(@Valid @RequestBody ChangePasswordDTO changePasswordDTO) throws Exception {
+        usuarioService.changePassword(changePasswordDTO);
+        return new MessageDTO<>(false, "Contraseña cambiada correctamente");
     }
 }

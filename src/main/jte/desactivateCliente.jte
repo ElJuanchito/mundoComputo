@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Actualización de datos</title>
+    <title>Cuenta eliminada - Mundo Computo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,13 +58,14 @@
         <div class="header">
             <span style="font-size: 1.5em; font-weight: bold; letter-spacing: 2px;">Mundo Computo</span>
         </div>
-        <h2 class="title">¡Hola de nuevo ${variable}!</h2>
+        <h2 class="title">Cuenta desactivada</h2>
         <div class="content">
-            <p>Queremos informarte que tus datos han sido <b>actualizados exitosamente</b> en <span style="color:#d90429;">Mundo Computo</span>.</p>
-            <p>Si no realizaste esta acción, por favor <a href="mailto:soporte@mundo-computo.com" class="button">contáctanos</a> de inmediato.</p>
+            <p>Hola ${variable},</p>
+            <p>Te informamos que tu cuenta en <span style="color:#d90429;">Mundo Computo</span> ha sido <b>desactivada temporalmente</b>.</p>
+            <p>Si no solicitaste esta acción o tienes alguna inquietud, por favor <a href="mailto:soporte@mundo-computo.com" class="button">contáctanos</a> de inmediato.</p>
         </div>
         <div class="footer">
-            Gracias por confiar en nosotros.<br>
+            Lamentamos verte partir.<br>
             <b>Equipo Mundo Computo</b>
         </div>
     </div>

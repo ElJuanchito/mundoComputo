@@ -20,7 +20,10 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     private final CategoriaProductoRepository categoriaProductoRepository;
 
-
+    /**
+     * {@inheritDoc}
+     * Crea una nueva categoría si el nombre no existe previamente.
+     */
     @Override
     public void createCategoria(CreateCategoriaDTO createCategoriaDTO) throws Exception {
         if(categoriaProductoRepository.existsByNombre(createCategoriaDTO.nombre())) {
@@ -33,6 +36,10 @@ public class CategoriaServiceImpl implements CategoriaService {
         categoriaProductoRepository.save(categoria);
     }
 
+    /**
+     * {@inheritDoc}
+     * Actualiza los datos de una categoría existente por su ID.
+     */
     @Override
     public void updateCategoria(UpdateCategoriaDTO updateCategoriaDTO) throws Exception {
         if(!categoriaProductoRepository.existsById(updateCategoriaDTO.id())) {
@@ -45,6 +52,10 @@ public class CategoriaServiceImpl implements CategoriaService {
         categoriaProductoRepository.save(categoria);
     }
 
+    /**
+     * {@inheritDoc}
+     * Elimina una categoría por su identificador si existe.
+     */
     @Override
     public void deleteCategoria(Long id) throws Exception {
         if(!categoriaProductoRepository.existsById(id)) {
@@ -53,6 +64,10 @@ public class CategoriaServiceImpl implements CategoriaService {
         categoriaProductoRepository.deleteById(id);
     }
 
+    /**
+     * {@inheritDoc}
+     * Obtiene la información de una categoría por su identificador.
+     */
     @Override
     public CategoriaInfoDTO getCategoriaInfoById(Long id) throws Exception {
         CategoriaProducto categoria = categoriaProductoRepository.findById(id)
@@ -60,6 +75,10 @@ public class CategoriaServiceImpl implements CategoriaService {
         return mapToCategoriaInfoDTO(categoria);
     }
 
+    /**
+     * {@inheritDoc}
+     * Obtiene la lista de todas las categorías registradas.
+     */
     @Override
     public List<CategoriaInfoDTO> getAllCategorias() throws Exception {
         List<CategoriaProducto> categorias = categoriaProductoRepository.findAll();
@@ -68,6 +87,10 @@ public class CategoriaServiceImpl implements CategoriaService {
             .toList();
     }
 
+    /**
+     * {@inheritDoc}
+     * Obtiene las categorías cuyo nombre coincide con el parámetro proporcionado.
+     */
     @Override
     public List<CategoriaInfoDTO> getCategoriasByName(String nombre) throws Exception {
         List<CategoriaProducto> categorias = categoriaProductoRepository.findByNombre(nombre);
@@ -76,6 +99,11 @@ public class CategoriaServiceImpl implements CategoriaService {
             .toList();
     }
 
+    /**
+     * Convierte una entidad CategoriaProducto en un DTO CategoriaInfoDTO.
+     * @param categoria Entidad de categoría
+     * @return DTO con la información de la categoría
+     */
     private CategoriaInfoDTO mapToCategoriaInfoDTO(CategoriaProducto categoria) {
         return new CategoriaInfoDTO(
             categoria.getId(),
