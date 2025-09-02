@@ -3,7 +3,6 @@ package co.edu.uniquindio.mundoComputo.services;
 import java.util.List;
 
 import co.edu.uniquindio.mundoComputo.dtos.productos.*;
-import co.edu.uniquindio.mundoComputo.model.HistoricoInventario;
 
 /**
  * Servicio para la gestión de productos en el sistema MundoComputo.

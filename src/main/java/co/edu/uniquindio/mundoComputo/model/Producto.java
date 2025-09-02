@@ -51,5 +51,6 @@ public class Producto {
     private CategoriaProducto categoria;
 
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private Set<DetalleVenta> detallesVenta;
 }

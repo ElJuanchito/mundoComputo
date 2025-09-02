@@ -42,9 +42,11 @@ public class Cliente {
     private String telefono;
 
     @OneToMany(mappedBy = "cliente")
+    @ToString.Exclude
     private Set<Venta> ventas;
 
     @OneToMany(mappedBy = "cliente")
+    @ToString.Exclude
     private Set<Reparacion> reparaciones;
 
     @Column(name = "estado")

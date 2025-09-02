@@ -1,11 +1,6 @@
 package co.edu.uniquindio.mundoComputo.dtos.productos;
 
-import co.edu.uniquindio.mundoComputo.model.Producto;
 import co.edu.uniquindio.mundoComputo.model.TipoMovimientoInventario;
-import co.edu.uniquindio.mundoComputo.model.Usuario;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 

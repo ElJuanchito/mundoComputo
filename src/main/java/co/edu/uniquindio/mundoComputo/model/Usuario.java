@@ -2,8 +2,6 @@ package co.edu.uniquindio.mundoComputo.model;
 
 import lombok.*;
 
-import java.util.Set;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

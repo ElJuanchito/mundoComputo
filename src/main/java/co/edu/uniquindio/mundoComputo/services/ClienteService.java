@@ -52,7 +52,6 @@ public interface ClienteService {
     /**
      * Obtiene un cliente por su identificador y lo desactiva.
      * @param id Identificador único del cliente.
-     * @return Cliente encontrado.
      * @throws Exception si el cliente no existe o ocurre un error.
      */
     void desactivarCliente(Long id) throws Exception;

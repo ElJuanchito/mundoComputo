@@ -30,5 +30,6 @@ public class CategoriaProducto {
     private String descripcion;
 
     @OneToMany(mappedBy = "categoria")
+    @ToString.Exclude
     private Set<Producto> productos;
 }

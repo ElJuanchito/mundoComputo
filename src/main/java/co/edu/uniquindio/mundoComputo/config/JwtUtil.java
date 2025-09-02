@@ -5,15 +5,19 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
-@RequiredArgsConstructor
 public class JwtUtil {
 
-    private final String SECRET_KEY = "secretosecretosecretosecretosecretosecretosecretosecretosecretosecreto";
+    private final String SECRET_KEY;
+
+    public JwtUtil(@Value("${jwt.secret}") String secretKey) {
+        this.SECRET_KEY = secretKey;
+    }
 
     public String generateToken(Usuario usuario) {
         return Jwts.builder()
@@ -42,4 +46,3 @@ public class JwtUtil {
         return extractClaims(token).get("rol", String.class);
     }
 }
-

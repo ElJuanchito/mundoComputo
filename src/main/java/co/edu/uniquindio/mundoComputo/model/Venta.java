@@ -36,6 +36,7 @@ public class Venta {
     private Cliente cliente;
 
     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private Set<DetalleVenta> detallesVenta;
 
     @OneToOne(mappedBy = "venta", cascade = CascadeType.ALL)

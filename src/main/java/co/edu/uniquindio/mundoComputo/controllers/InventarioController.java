@@ -5,7 +5,6 @@ import co.edu.uniquindio.mundoComputo.dtos.categorias.CreateCategoriaDTO;
 import co.edu.uniquindio.mundoComputo.dtos.categorias.UpdateCategoriaDTO;
 import co.edu.uniquindio.mundoComputo.dtos.productos.*;
 import co.edu.uniquindio.mundoComputo.dtos.responses.MessageDTO;
-import co.edu.uniquindio.mundoComputo.model.HistoricoInventario;
 import co.edu.uniquindio.mundoComputo.services.CategoriaService;
 import co.edu.uniquindio.mundoComputo.services.ProductoService;
 import io.swagger.v3.oas.annotations.Operation;
