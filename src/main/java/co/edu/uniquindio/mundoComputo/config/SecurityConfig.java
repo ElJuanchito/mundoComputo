@@ -39,6 +39,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/clientes/**").hasAnyRole("ADMIN", "VENDEDOR")
                         .anyRequest().permitAll()
                 )
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(new AuthEntryPoint()))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
