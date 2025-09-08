@@ -55,7 +55,9 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:4200",          // para desarrollo local
-                "https://mundocomputo.juanchito.me" // tu frontend desplegado
+                "https://mundocomputo.juanchito.me", // tu frontend desplegado
+                "https://mundo-computo-front.vercel.app",
+                "https://app.mundocomputo.juanchito.me"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
