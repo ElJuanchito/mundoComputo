@@ -57,3 +57,7 @@ jte {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+tasks.named('bootJar') {
+    dependsOn tasks.named('generateJte')
+}
