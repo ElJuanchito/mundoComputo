@@ -52,5 +52,6 @@ public class Usuario {
     @JoinColumn(name = "codigo_verificacion_id")
     private CodigoVerificacion codigoVerificacion;
 
+    @Lob
     private String imageUrl;
 }
