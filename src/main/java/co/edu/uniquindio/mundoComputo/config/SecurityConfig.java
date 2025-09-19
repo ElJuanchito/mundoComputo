@@ -33,11 +33,10 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**", "/api/storage/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/inventario/**").hasAnyRole("ADMIN", "INVENTARIO")
                         .requestMatchers("/api/clientes/**").hasAnyRole("ADMIN", "VENDEDOR")
-                        .requestMatchers("/api/storage/**").hasAnyRole("ADMIN", "INVENTARIO", "VENDEDOR", "TECNICO")
                         .requestMatchers("/api/usuarios/**").hasAnyRole("ADMIN", "INVENTARIO", "VENDEDOR", "TECNICO")
                         .anyRequest().permitAll()
                 )
