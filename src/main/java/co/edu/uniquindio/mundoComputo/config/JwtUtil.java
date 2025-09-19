@@ -23,6 +23,7 @@ public class JwtUtil {
                 .setSubject(usuario.getEmail())
                 .setIssuer("mundoComputo")
                 .claim("id", usuario.getId())
+                .claim("nombre", usuario.getNombre()+" "+usuario.getApellido())
                 .claim("rol", usuario.getRol().name())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 1000)) // 1h // 1h

@@ -11,6 +11,7 @@ public record CreateUsuarioDTO(
         @NotBlank String apellido,
         @NotBlank @Email String email,
         @Length(min = 8, max = 16) String contrasena,
-        @NotNull Rol rol
+        @NotNull Rol rol,
+        @NotBlank String imageUrl
 ) {
 }

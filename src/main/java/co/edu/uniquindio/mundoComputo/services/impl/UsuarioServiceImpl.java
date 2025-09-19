@@ -248,6 +248,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setContrasena(passwordEncoder.encode(dto.contrasena()));
         usuario.setEstado(EstadoUsuario.ACTIVO);
         usuario.setRol(dto.rol());
+        usuario.setImageUrl(dto.imageUrl());
         return usuario;
     }
 

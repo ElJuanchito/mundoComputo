@@ -52,4 +52,5 @@ public class Usuario {
     @JoinColumn(name = "codigo_verificacion_id")
     private CodigoVerificacion codigoVerificacion;
 
+    private String imageUrl;
 }
