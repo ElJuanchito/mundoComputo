@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 public record UpdateUsuarioDTO(
         @NotNull Long id,
         @NotBlank String nombre,
-        @NotBlank String apellido
+        @NotBlank String apellido,
+        @NotBlank String imageUrl
         ) {
 }

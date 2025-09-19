@@ -38,6 +38,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/inventario/**").hasAnyRole("ADMIN", "INVENTARIO")
                         .requestMatchers("/api/clientes/**").hasAnyRole("ADMIN", "VENDEDOR")
                         .requestMatchers("/api/storage/**").hasAnyRole("ADMIN", "INVENTARIO", "VENDEDOR", "TECNICO")
+                        .requestMatchers("/api/usuarios/**").hasAnyRole("ADMIN", "INVENTARIO", "VENDEDOR", "TECNICO")
                         .anyRequest().permitAll()
                 )
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(new AuthEntryPoint()))

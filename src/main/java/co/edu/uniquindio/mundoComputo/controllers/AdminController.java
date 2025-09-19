@@ -42,36 +42,12 @@ public class AdminController {
         return new MessageDTO<>(false, "Usuario creado correctamente");
     }
 
-    @Operation(summary = "Actualizar usuario", description = "Actualiza la información de un usuario existente")
-    @PutMapping("/usuarios")
-    @ResponseStatus(code = HttpStatus.OK)
-    public MessageDTO<String> updateUsuario(@Valid @RequestBody UpdateUsuarioDTO updateUsuarioDTO) throws Exception {
-        usuarioService.updateUsuario(updateUsuarioDTO);
-        return new MessageDTO<>(false, "Usuario actualizado correctamente");
-    }
-
-    @Operation(summary = "Eliminar usuario", description = "Elimina un usuario por su identificador")
-    @DeleteMapping("/usuarios/{id}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public MessageDTO<String> deleteUsuario(@PathVariable("id") Long id) throws Exception {
-        usuarioService.deleteUsuario(id);
-        return new MessageDTO<>(false, "Usuario eliminado correctamente");
-    }
-
     @Operation(summary = "Obtener todos los usuarios", description = "Obtiene la lista de todos los usuarios registrados")
     @GetMapping("/usuarios")
     @ResponseStatus(code = HttpStatus.OK)
     public MessageDTO<List<UsuarioInfoDTO>> getAllUsuarios() {
         List<UsuarioInfoDTO> usuarios = usuarioService.getAllUsuarios();
         return new MessageDTO<>(false, usuarios);
-    }
-
-    @Operation(summary = "Obtener usuario por ID", description = "Obtiene la información de un usuario por su identificador")
-    @GetMapping("/usuarios/{id}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public MessageDTO<UsuarioInfoDTO> getUsuarioById(@PathVariable("id") Long id) throws Exception {
-        UsuarioInfoDTO usuario = usuarioService.getUsuarioById(id);
-        return new MessageDTO<>(false, usuario);
     }
 
     @Operation(summary = "Obtener usuarios por estado", description = "Obtiene los usuarios filtrados por estado")

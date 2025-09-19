@@ -78,6 +78,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         usuario.setNombre(updateUsuarioDTO.nombre());
         usuario.setApellido(updateUsuarioDTO.apellido());
+        usuario.setImageUrl(updateUsuarioDTO.imageUrl());
 
         usuarioRepository.save(usuario);
     }
